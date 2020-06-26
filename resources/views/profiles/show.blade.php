@@ -1,6 +1,5 @@
-@extends('layouts.app')
+@component('components.app')
 
-@section('content')
     <header class="mb-6 relative">
         <img src="/images/daffy4.jpg" alt=""
              class="mb-2"
@@ -33,4 +32,4 @@
     </header>
 
     @include('_timeline', ['tweets' => $user->tweets])
-@endsection
+@endcomponent

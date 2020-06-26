@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@component('components.app')
 
-@section('content')
     @include('_publish-tweet-panel')
 
     @include('_timeline')
-@endsection
+@endcomponent
