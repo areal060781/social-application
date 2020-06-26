@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     // custom accessor
     public function getAvatarAttribute(){
-        return "https://i.pravatar.cc/40?u=" . $this->email;
+        return "https://i.pravatar.cc/200?u=" . $this->email;
     }
 
     public function tweets(){
@@ -61,5 +61,10 @@ class User extends Authenticatable
             ->orWhere('user_id', $this->id)
             ->latest()
             ->get();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
     }
 }
