@@ -1,5 +1,5 @@
 @if (auth()->user()->isNot($user))
-<form action="/profiles/{{$user->name}}/follow" method="post">
+<form action="route('follow', $user->username)" method="post">
     @csrf
     <button
         type="submit"

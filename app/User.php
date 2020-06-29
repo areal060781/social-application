@@ -38,16 +38,24 @@ class User extends Authenticatable
     ];
 
     // custom accessor
-    public function getAvatarAttribute($value){
+    public function getAvatarAttribute($value)
+    {
         //return "https://i.pravatar.cc/200?u=" . $this->email;
-        return asset('storage/'.$value);
+        return asset($value ? 'storage/'.$value : '/images/default-avatar.png');
     }
 
-    public function tweets(){
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function tweets()
+    {
         return $this->hasMany(Tweet::class)->latest();
     }
 
-    public function timeline(){
+    public function timeline()
+    {
         $friends = $this->follows()->pluck('id');
 
         return Tweet::whereIn('user_id', $friends)
@@ -61,7 +69,8 @@ class User extends Authenticatable
         return 'username';
     }
 
-    public function path($append = ''){
+    public function path($append = '')
+    {
         $path = route('profile', $this->username);
 
         return $append ? "{$path}/{$append}" : $path;
