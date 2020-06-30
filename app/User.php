@@ -37,6 +37,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class)->latest();
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
     // custom accessor
     public function getAvatarAttribute($value)
     {
@@ -49,17 +58,13 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function tweets()
-    {
-        return $this->hasMany(Tweet::class)->latest();
-    }
-
     public function timeline()
     {
         $friends = $this->follows()->pluck('id');
 
         return Tweet::whereIn('user_id', $friends)
             ->orWhere('user_id', $this->id)
+            ->withLikes()
             ->latest()
             ->paginate(5);
     }
