@@ -2,7 +2,7 @@
 
     <header class="mb-6 relative">
         <div class="relative">
-            <img src="/images/daffy4.jpg" alt=""
+            <img src="/images/600x200.jpeg" alt=""
                  class="rounded-lg mb-2"
                  width="700px"
                  height="223px"
